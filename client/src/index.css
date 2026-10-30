@@ -1,0 +1,881 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:where(.light, .light *));
+
+/* ==========================================================================
+   TASTESPEC — Cinematic Developer Laboratory Design System
+   THEME COLOR TOKENS:
+   - DARK MODE:  Base canvas #030509, Panel rgba(10, 15, 28, 0.65), Borders rgba(255, 255, 255, 0.09), Text #f8fafc
+   - LIGHT MODE: Base canvas #f8fafc, Panel rgba(255, 255, 255, 0.80), Borders rgba(0, 0, 0, 0.08), Text #0f172a
+   ========================================================================== */
+
+:root,
+html.dark {
+  color-scheme: dark;
+
+  /* Theme Tokens — DARK MODE */
+  --bg-app: #030509;
+  --bg-panel: rgba(10, 15, 28, 0.60);
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --text-primary: #f8fafc;
+
+  /* Surfaces & Backgrounds */
+  --bg-surface-0: rgba(10, 15, 28, 0.45);
+  --bg-surface-1: rgba(10, 15, 28, 0.60);
+  --bg-surface-2: rgba(15, 22, 40, 0.70);
+  --bg-surface-3: rgba(20, 28, 52, 0.80);
+  --bg-glass: rgba(10, 15, 28, 0.60);
+  --bg-glass-heavy: rgba(10, 15, 28, 0.85);
+
+  /* Borders & Dividers */
+  --border-medium: rgba(255, 255, 255, 0.15);
+  --border-prominent: rgba(255, 255, 255, 0.22);
+  --border-cyan: rgba(6, 182, 212, 0.35);
+  --border-violet: rgba(139, 92, 246, 0.35);
+
+  /* Typography Colors */
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-disabled: #475569;
+
+  /* Code & Badges */
+  --code-bg: #070a10;
+  --code-text: #e2e8f0;
+  --code-border: rgba(255, 255, 255, 0.09);
+  --badge-bg-neutral: rgba(255, 255, 255, 0.06);
+  --badge-text-neutral: #94a3b8;
+
+  /* Accents & States */
+  --cyan-primary: #06b6d4;
+  --cyan-hover: #22d3ee;
+  --cyan-subtle: rgba(6, 182, 212, 0.12);
+  --cyan-glow: rgba(6, 182, 212, 0.25);
+
+  --violet-primary: #8b5cf6;
+  --violet-hover: #a78bfa;
+  --violet-subtle: rgba(139, 92, 246, 0.12);
+
+  --status-pass: #10b981;
+  --status-pass-subtle: rgba(16, 185, 129, 0.12);
+  --status-pass-border: rgba(16, 185, 129, 0.35);
+
+  --status-warn: #f59e0b;
+  --status-warn-subtle: rgba(245, 158, 11, 0.12);
+  --status-warn-border: rgba(245, 158, 11, 0.35);
+
+  --status-fail: #f43f5e;
+  --status-fail-subtle: rgba(244, 63, 94, 0.12);
+  --status-fail-border: rgba(244, 63, 94, 0.35);
+
+  --status-unverified: #a855f7;
+  --status-unverified-subtle: rgba(168, 85, 247, 0.12);
+  --status-unverified-border: rgba(168, 85, 247, 0.35);
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.7);
+  --shadow-accent: 0 0 20px rgba(6, 182, 212, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.light {
+  color-scheme: light;
+
+  /* Theme Tokens — LIGHT MODE (Apple / Vercel Aesthetic) */
+  --bg-app: #F8FAFC;
+  --bg-panel: rgba(255, 255, 255, 0.82);
+  --border-subtle: rgba(226, 232, 240, 0.90);
+  --text-primary: #0f172a;
+
+  /* Surfaces & Backgrounds */
+  --bg-surface-0: rgba(248, 250, 252, 0.85);
+  --bg-surface-1: rgba(255, 255, 255, 0.82);
+  --bg-surface-2: rgba(255, 255, 255, 0.95);
+  --bg-surface-3: rgba(241, 245, 249, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.82);
+  --bg-glass-heavy: rgba(255, 255, 255, 0.95);
+
+  /* Borders & Dividers */
+  --border-medium: rgba(226, 232, 240, 0.90);
+  --border-prominent: rgba(203, 213, 225, 0.90);
+  --border-cyan: rgba(14, 165, 233, 0.45);
+  --border-violet: rgba(168, 85, 247, 0.45);
+
+  /* Typography Colors */
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-disabled: #94a3b8;
+
+  /* Code & Badges */
+  --code-bg: #f1f5f9;
+  --code-text: #334155;
+  --code-border: rgba(226, 232, 240, 0.90);
+  --badge-bg-neutral: rgba(0, 0, 0, 0.05);
+  --badge-text-neutral: #334155;
+
+  /* Accents & States — tuned for high contrast in light mode */
+  --cyan-primary: #0284c7;
+  --cyan-hover: #0ea5e9;
+  --cyan-subtle: rgba(14, 165, 233, 0.12);
+  --cyan-glow: rgba(14, 165, 233, 0.20);
+
+  --violet-primary: #9333ea;
+  --violet-hover: #a855f7;
+  --violet-subtle: rgba(168, 85, 247, 0.12);
+
+  /* Status Badges Tokens */
+  --status-pass: #065f46;
+  --status-pass-subtle: #d1fae5;
+  --status-pass-border: #6ee7b7;
+
+  --status-warn: #92400e;
+  --status-warn-subtle: #fef3c7;
+  --status-warn-border: #fcd34d;
+
+  --status-fail: #9f1239;
+  --status-fail-subtle: #ffe4e6;
+  --status-fail-border: #fda4af;
+
+  --status-unverified: #6b21a8;
+  --status-unverified-subtle: #f3e8ff;
+  --status-unverified-border: #d8b4fe;
+
+  /* Shadows for Light Mode (Vercel/Apple Subtle Elevation) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-accent: 0 0 20px rgba(14, 165, 233, 0.12);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface-3);
+  border-radius: var(--radius-xs);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Accessibility: Focus Ring */
+:focus-visible {
+  outline: 2px solid var(--cyan-primary);
+  outline-offset: 2px;
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Typography Utilities */
+.mono {
+  font-family: var(--font-mono);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-cyan {
+  color: var(--cyan-primary);
+}
+
+.text-violet {
+  color: var(--violet-primary);
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Ambient Glassmorphic Atmosphere & Theme Canvas
+   DARK MODE:
+     - Base canvas: #030509
+     - Panel background: rgba(10, 15, 28, 0.65) with backdrop-filter: blur(20px)
+     - Subpixel borders: rgba(255, 255, 255, 0.09)
+     - Primary text: #f8fafc
+   LIGHT MODE:
+     - Base canvas: #f8fafc
+     - Panel background: rgba(255, 255, 255, 0.80) with backdrop-filter: blur(20px)
+     - Subpixel borders: rgba(0, 0, 0, 0.08)
+     - Primary text: #0f172a
+   ========================================================================== */
+@layer base {
+  body {
+    background-color: var(--bg-app) !important;
+    color: var(--text-primary);
+    min-height: 100vh;
+    position: relative;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  /* Default / Dark Mode root layers */
+  #root {
+    min-height: 100vh;
+    position: relative;
+    background-color: transparent;
+  }
+
+  #root::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-color: #030509;
+    background-image: 
+      radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.16) 0%, transparent 45%),
+      radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.16) 0%, transparent 50%),
+      radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.12) 0%, transparent 55%);
+    background-attachment: fixed;
+    transition: background-color 0.25s ease;
+  }
+
+  #root::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-size: 36px 36px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 40%, transparent 100%);
+    background-attachment: fixed;
+  }
+
+  /* Light Mode Root Background and Mesh Overrides (Apple / Vercel Aesthetic) */
+  html.light body,
+  .light body {
+    background-color: #F8FAFC !important;
+  }
+
+  html.light #root::before,
+  .light #root::before {
+    background-color: #F8FAFC !important;
+    background-image: 
+      radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 90% 15%, rgba(168, 85, 247, 0.08) 0%, transparent 45%),
+      radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 50%) !important;
+    background-attachment: fixed !important;
+  }
+
+  html.light #root::after,
+  .light #root::after {
+    background-size: 32px 32px !important;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px) !important;
+    -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 40%, transparent 100%) !important;
+    mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 40%, transparent 100%) !important;
+    background-attachment: fixed !important;
+  }
+}
+
+/* Base Glass Card (.glass-card) */
+.glass-card {
+  background: rgba(10, 15, 28, 0.60);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Translucent Frosted Glass Container Cards — DARK MODE */
+.cyber-glass-panel,
+.glass-panel,
+.vibecode-card,
+.frosted-glass-card,
+.cyber-panel,
+.cyber-panel-v2,
+.panel,
+[class*="Panel"] {
+  background: rgba(10, 15, 28, 0.60) !important; /* translucent slate */
+  backdrop-filter: blur(24px) !important; /* backdrop-blur-xl */
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important; /* border-white/10 */
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12) !important; /* 1px subpixel top-highlight */
+  border-radius: 1rem !important; /* rounded-2xl */
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease !important;
+}
+
+.cyber-glass-panel:hover,
+.glass-panel:hover,
+.vibecode-card:hover,
+.frosted-glass-card:hover,
+.cyber-panel:hover,
+.cyber-panel-v2:hover,
+.panel:hover,
+[class*="Panel"]:hover {
+  border-color: rgba(6, 182, 212, 0.40) !important; /* hover:border-cyan-500/40 */
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(6, 182, 212, 0.15), /* shadow-[0_0_25px_rgba(6,182,212,0.15)] */
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.20) !important;
+}
+
+/* Glassmorphic Card Containers — LIGHT MODE (.light .glass-card) */
+html.light .glass-card,
+.light .glass-card,
+html.light .cyber-glass-panel,
+.light .cyber-glass-panel,
+html.light .glass-panel,
+.light .glass-panel,
+html.light .vibecode-card,
+.light .vibecode-card,
+html.light .frosted-glass-card,
+.light .frosted-glass-card,
+html.light .cyber-panel,
+.light .cyber-panel,
+html.light .cyber-panel-v2,
+.light .cyber-panel-v2,
+html.light .panel,
+.light .panel,
+html.light [class*="Panel"],
+.light [class*="Panel"] {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(226, 232, 240, 0.90) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important; /* shadow-sm */
+  border-radius: 1rem !important; /* rounded-2xl */
+  color: #0f172a !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html.light .glass-card:hover,
+.light .glass-card:hover,
+html.light .cyber-glass-panel:hover,
+.light .cyber-glass-panel:hover,
+html.light .glass-panel:hover,
+.light .glass-panel:hover,
+html.light .vibecode-card:hover,
+.light .vibecode-card:hover,
+html.light .frosted-glass-card:hover,
+.light .frosted-glass-card:hover,
+html.light .cyber-panel:hover,
+.light .cyber-panel:hover,
+html.light .cyber-panel-v2:hover,
+.light .cyber-panel-v2:hover,
+html.light .panel:hover,
+.light .panel:hover,
+html.light [class*="Panel"]:hover,
+.light [class*="Panel"]:hover {
+  border-color: rgba(14, 165, 233, 0.45) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -2px rgba(0, 0, 0, 0.10) !important; /* shadow-md */
+}
+
+/* Semi-Transparent Glass Inputs, Textareas & Selects */
+.glass-input,
+textarea.glass-input,
+input.glass-input,
+select.glass-input {
+  background: rgba(15, 23, 42, 0.45) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 0.75rem !important;
+  color: #f1f5f9 !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+.glass-input:focus,
+textarea.glass-input:focus,
+input.glass-input:focus,
+select.glass-input:focus,
+.glass-input:focus-within {
+  outline: none !important;
+  border-color: rgba(6, 182, 212, 0.70) !important;
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.35), 0 0 20px rgba(6, 182, 212, 0.25) !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+}
+
+html.light .glass-input,
+html.light textarea.glass-input,
+html.light input.glass-input,
+html.light select.glass-input {
+  background: rgba(255, 255, 255, 0.70) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #0f172a !important;
+}
+
+html.light .glass-input:focus,
+html.light textarea.glass-input:focus,
+html.light input.glass-input:focus,
+html.light select.glass-input:focus,
+html.light .glass-input:focus-within {
+  border-color: rgba(6, 182, 212, 0.75) !important;
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.35), 0 0 20px rgba(6, 182, 212, 0.20) !important;
+  background: #ffffff !important;
+}
+
+/* ==========================================================================
+   Automatic Contrast Adaptations for Light Mode
+   (Text labels, monospace badges, and code blocks)
+   ========================================================================== */
+
+/* Text Labels & Typography Adaptations */
+html.light .text-slate-100,
+html.light .text-slate-200,
+html.light .text-zinc-100,
+html.light .text-zinc-200 {
+  color: #0f172a !important;
+}
+
+html.light .text-slate-300,
+html.light .text-zinc-300 {
+  color: #1e293b !important;
+}
+
+html.light .text-slate-400,
+html.light .text-zinc-400 {
+  color: #475569 !important;
+}
+
+html.light .text-slate-500,
+html.light .text-zinc-500 {
+  color: #64748b !important;
+}
+
+html.light .text-slate-600,
+html.light .text-zinc-600 {
+  color: #94a3b8 !important;
+}
+
+/* Primary Headings: text-slate-900 font-bold */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6,
+html.light .heading,
+html.light [class*="font-bold"]:not(button[class*="from-"]):not([class*="bg-cyan-500"]) {
+  color: #0f172a !important; /* text-slate-900 */
+  font-weight: 700 !important;
+}
+
+/* Body & Code Text: text-slate-700 font-mono */
+html.light p,
+html.light span.text-body,
+html.light [class*="text-slate-600"],
+html.light [class*="text-slate-700"] {
+  color: #334155 !important; /* text-slate-700 */
+}
+
+html.light code,
+html.light pre,
+html.light textarea.font-mono,
+html.light input.font-mono,
+html.light .mono,
+html.light [class*="font-mono"]:not([class*="badge"]):not([class*="bg-"]):not([class*="text-cyan-"]):not([class*="text-emerald-"]):not([class*="text-amber-"]):not([class*="text-rose-"]):not([class*="text-violet-"]):not([class*="text-purple-"]) {
+  color: #334155 !important; /* text-slate-700 */
+  font-family: var(--font-mono) !important;
+}
+
+/* Adapt white text on panels while protecting solid filled action buttons */
+html.light :not(button[class*="bg-rose-"]):not(button[class*="bg-emerald-"]):not(button[class*="bg-blue-"]):not(button[class*="bg-cyan-"]):not([class*="from-cyan-500"]) > .text-white,
+html.light p.text-white,
+html.light span.text-white,
+html.light div.text-white {
+  color: #0f172a !important;
+}
+
+/* ==========================================================================
+   STATUS BADGES IN LIGHT MODE:
+   - PASS: bg-emerald-100 text-emerald-800 border-emerald-300 font-bold
+   - WARNING: bg-amber-100 text-amber-800 border-amber-300 font-bold
+   - FAIL: bg-rose-100 text-rose-800 border-rose-300 font-bold
+   - UNVERIFIABLE: bg-purple-100 text-purple-800 border-purple-300 font-bold
+   ========================================================================== */
+
+/* PASS: bg-emerald-100 text-emerald-800 border-emerald-300 font-bold */
+html.light .badge-pass,
+html.light [data-status="PASS"],
+html.light [class*="bg-emerald-950"],
+html.light [class*="bg-emerald-500\/10"],
+html.light [class*="bg-emerald-500\/15"],
+html.light [class*="light:bg-emerald-100"] {
+  background-color: #d1fae5 !important; /* bg-emerald-100 */
+  color: #065f46 !important; /* text-emerald-800 */
+  border-color: #6ee7b7 !important; /* border-emerald-300 */
+  font-weight: 700 !important;
+}
+html.light [class*="border-emerald-500"] {
+  border-color: #6ee7b7 !important;
+}
+html.light [class*="text-emerald-400"] {
+  color: #065f46 !important;
+}
+
+/* WARNING: bg-amber-100 text-amber-800 border-amber-300 font-bold */
+html.light .badge-warn,
+html.light [data-status="WARNING"],
+html.light [class*="bg-amber-950"],
+html.light [class*="bg-amber-500\/10"],
+html.light [class*="bg-amber-500\/15"],
+html.light [class*="light:bg-amber-100"] {
+  background-color: #fef3c7 !important; /* bg-amber-100 */
+  color: #92400e !important; /* text-amber-800 */
+  border-color: #fcd34d !important; /* border-amber-300 */
+  font-weight: 700 !important;
+}
+html.light [class*="border-amber-500"] {
+  border-color: #fcd34d !important;
+}
+html.light [class*="text-amber-400"] {
+  color: #92400e !important;
+}
+
+/* FAIL: bg-rose-100 text-rose-800 border-rose-300 font-bold */
+html.light .badge-fail,
+html.light [data-status="FAIL"],
+html.light [class*="bg-rose-950"],
+html.light [class*="bg-rose-500\/10"],
+html.light [class*="bg-rose-500\/15"],
+html.light [class*="light:bg-rose-100"] {
+  background-color: #ffe4e6 !important; /* bg-rose-100 */
+  color: #9f1239 !important; /* text-rose-800 */
+  border-color: #fda4af !important; /* border-rose-300 */
+  font-weight: 700 !important;
+}
+html.light [class*="border-rose-500"] {
+  border-color: #fda4af !important;
+}
+html.light [class*="text-rose-400"] {
+  color: #9f1239 !important;
+}
+
+/* UNVERIFIABLE: bg-purple-100 text-purple-800 border-purple-300 font-bold */
+html.light .badge-unverified,
+html.light [data-status="UNVERIFIABLE"],
+html.light [class*="bg-violet-950"],
+html.light [class*="bg-purple-950"],
+html.light [class*="bg-violet-500\/10"],
+html.light [class*="bg-violet-500\/15"],
+html.light [class*="light:bg-purple-100"] {
+  background-color: #f3e8ff !important; /* bg-purple-100 */
+  color: #6b21a8 !important; /* text-purple-800 */
+  border-color: #d8b4fe !important; /* border-purple-300 */
+  font-weight: 700 !important;
+}
+html.light [class*="border-violet-500"],
+html.light [class*="border-purple-500"] {
+  border-color: #d8b4fe !important;
+}
+html.light [class*="text-violet-400"],
+html.light [class*="text-purple-400"] {
+  color: #6b21a8 !important;
+}
+
+html.light .bg-cyan-950\/40,
+html.light .bg-cyan-950\/50,
+html.light .bg-cyan-950\/60 {
+  background-color: rgba(8, 145, 178, 0.12) !important;
+}
+html.light .border-cyan-800\/80,
+html.light .border-cyan-500\/30,
+html.light .border-cyan-500\/40 {
+  border-color: rgba(8, 145, 178, 0.35) !important;
+}
+html.light .text-cyan-300,
+html.light .text-cyan-400 {
+  color: #0891b2 !important;
+}
+
+/* Subtle Borders & Dividers in Light Mode */
+html.light .border-white\/10,
+html.light .border-white\/5,
+html.light .border-white\/15,
+html.light .border-white\/20,
+html.light .divide-white\/10 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Subtle Glass Background Accents in Light Mode */
+html.light .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+html.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+html.light .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+html.light .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+/* Code Blocks, Monospace Textareas & Terminal Feed */
+html.light pre,
+html.light code {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light textarea.font-mono,
+html.light input.font-mono {
+  color: #0f172a !important;
+}
+
+html.light textarea::placeholder,
+html.light input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Recessed boxes (e.g. terminal logs, JSON container, code viewer) */
+html.light .bg-black\/20,
+html.light .bg-black\/30,
+html.light .bg-black\/40,
+html.light .bg-black\/50,
+html.light .bg-black\/60 {
+  background-color: rgba(241, 245, 249, 0.90) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Table Highlighting in Light Mode */
+html.light thead tr {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+  color: #475569 !important;
+}
+
+html.light tbody tr:hover {
+  background-color: rgba(241, 245, 249, 0.6) !important;
+}
+
+/* Drawers and Dialogs in Light Mode */
+html.light aside[role="dialog"] {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #0f172a !important;
+}
+
+html.light .scanline-layer {
+  opacity: 0.04 !important;
+}
+
+.ambient-mesh-overlay {
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.16) 0%, transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.12) 0%, transparent 55%);
+  background-attachment: fixed;
+}
+
+html.light .ambient-mesh-overlay,
+.light .ambient-mesh-overlay {
+  background-color: #F8FAFC !important;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 15%, rgba(168, 85, 247, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 50%) !important;
+  background-attachment: fixed !important;
+}
+
+.vibecode-bg-canvas {
+  background-color: var(--bg-app);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.16) 0%, transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.12) 0%, transparent 55%);
+  background-attachment: fixed;
+}
+
+html.light .vibecode-bg-canvas,
+.light .vibecode-bg-canvas {
+  background-color: #F8FAFC !important;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 15%, rgba(168, 85, 247, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 50%) !important;
+}
+
+.cyber-grid-overlay,
+.perspective-grid-overlay {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 40%, transparent 100%);
+}
+
+html.light .cyber-grid-overlay,
+html.light .perspective-grid-overlay,
+.light .cyber-grid-overlay,
+.light .perspective-grid-overlay {
+  background-size: 32px 32px !important;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px) !important;
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 40%, transparent 100%) !important;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 40%, transparent 100%) !important;
+}
+
+.scanline-layer {
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.25) 51%
+  );
+  background-size: 100% 4px;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes glowDrift {
+  0% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.15); }
+  100% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+.animate-glow-drift {
+  animation: glowDrift 16s ease-in-out infinite alternate;
+}
+
+.animate-float-slow {
+  animation: float 12s ease-in-out infinite;
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+/* ==========================================================================
+   Print Stylesheet for PDF Export via Browser Print Dialog
+   ========================================================================== */
+@media print {
+  /* Hide non-printable navigation, buttons, and chrome */
+  header,
+  nav,
+  button,
+  .no-print,
+  [role="tablist"] {
+    display: none !important;
+  }
+
+  body, html {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 10pt !important;
+  }
+
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Reset panels for paper printing */
+  .panel, [class*="Panel"] {
+    background: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 1rem !important;
+    padding: 0.75rem !important;
+  }
+
+  /* Text color readability on white paper */
+  h1, h2, h3, h4, th, strong {
+    color: #0f172a !important;
+  }
+
+  p, span, td, div {
+    color: #334155 !important;
+  }
+
+  code, pre {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 1px solid #e2e8f0 !important;
+    font-size: 8.5pt !important;
+  }
+
+  /* Printable compliance badge borders */
+  .status-badge {
+    border: 1px solid #94a3b8 !important;
+    color: #0f172a !important;
+  }
+
+  /* Page break helpers */
+  .page-break-after {
+    page-break-after: always;
+  }
+}

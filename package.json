@@ -1,0 +1,45 @@
+{
+  "name": "tastespec",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TASTESPEC - Cultural AI Agent Testbench",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -p \"[{name}]\" -n \"SERVER,CLIENT\" -c \"cyan.bold,magenta.bold\" \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "tsx watch server/src/index.ts",
+    "dev:client": "vite --config client/vite.config.ts",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build --config client/vite.config.ts",
+    "build:server": "tsc -p server/tsconfig.json",
+    "type-check": "tsc -p client/tsconfig.json --noEmit && tsc -p server/tsconfig.json --noEmit",
+    "start": "NODE_ENV=production node server/dist/server/src/index.js",
+    "test": "tsx --test test/*.test.ts test/*.test.js",
+    "test:smoke": "tsx server/src/smokeTest.ts"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "@types/three": "^0.186.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "framer-motion": "^14.7.1",
+    "lucide-react": "^1.63.0",
+    "three": "^0.186.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vite": "^6.2.0"
+  }
+}

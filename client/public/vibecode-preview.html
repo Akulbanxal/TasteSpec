@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TASTESPEC Dynamic Vibecode Canvas Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          },
+          animation: {
+            'scanline': 'scanline 8s linear infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float-slow': 'float 12s ease-in-out infinite',
+            'glow-drift': 'glowDrift 16s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            scanline: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(1000%)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-15px)' },
+            },
+            glowDrift: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '50%': { transform: 'translate(40px, -30px) scale(1.15)' },
+              '100%': { transform: 'translate(-20px, 20px) scale(0.95)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Radial Gradient Atmosphere Background */
+    .vibecode-bg-canvas {
+      background-color: #05070B;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* Cyber Matrix Perspective Grid Overlay */
+    .cyber-grid-overlay {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Glassmorphic Cyber Panels */
+    .cyber-panel {
+      background: rgba(10, 14, 23, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .cyber-panel:hover {
+      border-color: rgba(6, 182, 212, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 25px rgba(6, 182, 212, 0.15);
+    }
+
+    /* Scanline effect layer */
+    .scanline-layer {
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.25) 51%
+      );
+      background-size: 100% 4px;
+    }
+  </style>
+</head>
+<body class="vibecode-bg-canvas min-h-screen text-slate-100 font-sans relative overflow-x-hidden selection:bg-cyan-500/30">
+
+  <!-- Scanline Screen Effect Layer -->
+  <div class="fixed inset-0 pointer-events-none scanline-layer z-50 opacity-40"></div>
+
+  <!-- Background Animated Mesh Light Orbs -->
+  <div class="fixed top-[-10%] left-[-5%] w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none animate-glow-drift"></div>
+  <div class="fixed top-[30%] right-[-10%] w-[600px] h-[600px] bg-purple-600/15 rounded-full blur-[160px] pointer-events-none animate-glow-drift" style="animation-delay: -5s;"></div>
+  <div class="fixed bottom-[-10%] left-[20%] w-[550px] h-[550px] bg-emerald-500/10 rounded-full blur-[150px] pointer-events-none animate-glow-drift" style="animation-delay: -10s;"></div>
+
+  <!-- Grid Perspective Background Overlay -->
+  <div class="fixed inset-0 cyber-grid-overlay pointer-events-none opacity-60"></div>
+
+  <!-- Top Navigation App Shell -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#05070B]/80 backdrop-blur-xl">
+    <div class="max-w-[1600px] mx-auto px-6 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-mono font-bold text-slate-950 shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+          T
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-white tracking-wider text-sm font-mono">TASTESPEC</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-400 border border-cyan-800">v1.1.0</span>
+          </div>
+          <p class="text-[11px] text-slate-400 font-mono">Cultural AI Agent Evaluation Platform</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center gap-1 p-1 rounded-xl bg-slate-900/60 border border-white/5 backdrop-blur-md">
+        <a href="/" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shadow-[0_0_12px_rgba(6,182,212,0.2)]">
+          Testbench
+        </a>
+        <a href="/" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-400 hover:text-slate-200 transition-colors">
+          Scenarios
+        </a>
+        <a href="/" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-400 hover:text-slate-200 transition-colors">
+          Live Run
+        </a>
+        <a href="/" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-400 hover:text-slate-200 transition-colors">
+          Results & Audit
+        </a>
+        <a href="/" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-400 hover:text-slate-200 transition-colors">
+          3D Mission
+        </a>
+        <a href="/" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-400 hover:text-slate-200 transition-colors">
+          Evidence Graph
+        </a>
+      </nav>
+
+      <!-- Status Pillar -->
+      <div class="flex items-center gap-3 font-mono text-xs">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.2)]">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>QLOO LIVE</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Canvas Container -->
+  <main class="max-w-[1600px] mx-auto px-6 py-8 relative z-10 space-y-6">
+
+    <!-- Workspace Banner -->
+    <div class="cyber-panel rounded-2xl p-4 flex items-center justify-between relative overflow-hidden">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-mono text-sm font-bold shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+          //
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-0.5">
+            <span class="text-[10px] font-mono text-cyan-400 tracking-wider uppercase">ACTIVE WORKSPACE BENCHMARK</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">urn:entity:place</span>
+          </div>
+          <h1 className="text-base font-bold text-white tracking-tight font-mono">
+            Brooklyn Neo-Psychedelia to Natural Wine // East Williamsburg Audiophile
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-mono text-slate-400">SEEDS:</span>
+        <span class="px-2.5 py-1 rounded-lg bg-cyan-950/60 border border-cyan-800/80 text-cyan-300 text-xs font-mono shadow-[0_0_10px_rgba(6,182,212,0.15)]">
+          Stereolab <span class="text-[10px] text-slate-400">(MUSIC)</span>
+        </span>
+        <span class="px-2.5 py-1 rounded-lg bg-cyan-950/60 border border-cyan-800/80 text-cyan-300 text-xs font-mono shadow-[0_0_10px_rgba(6,182,212,0.15)]">
+          Crumb <span class="text-[10px] text-slate-400">(MUSIC)</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Grid Workspace -->
+    <div class="grid grid-cols-12 gap-6">
+      
+      <!-- Left Control Panel (4 Cols) -->
+      <div class="col-span-12 lg:col-span-4 space-y-6">
+        
+        <!-- Scenario Profile Card -->
+        <div class="cyber-panel rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-white/5 pb-3">
+            <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">// Scenario Profile</span>
+            <span class="text-xs font-mono text-cyan-400 bg-cyan-950/60 border border-cyan-800/80 px-2 py-0.5 rounded">
+              θ ≥ 0.65
+            </span>
+          </div>
+
+          <div class="space-y-3 font-mono text-xs">
+            <div>
+              <div class="text-[10px] text-slate-500 uppercase mb-1">Target Persona Template</div>
+              <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800/80 text-slate-200">
+                Brooklyn Neo-Psychedelia to Natural Wine
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <div class="text-[10px] text-slate-500 uppercase mb-1">Target Domain</div>
+                <div class="p-2 rounded-lg bg-slate-950/70 border border-slate-800/80 text-cyan-400 font-bold">
+                  PLACE
+                </div>
+              </div>
+              <div>
+                <div class="text-[10px] text-slate-500 uppercase mb-1">Forbidden Tags</div>
+                <div class="p-2 rounded-lg bg-rose-950/40 border border-rose-900/60 text-rose-400 font-bold">
+                  sports_bar
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agent Payload Input Card -->
+        <div class="cyber-panel rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-white/5 pb-3">
+            <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">// Agent Payload Feed</span>
+            <div class="flex items-center gap-1">
+              <button id="btn-valid" class="px-2 py-0.5 rounded bg-emerald-950/50 border border-emerald-800 text-[10px] font-mono text-emerald-400">Valid</button>
+              <button id="btn-forbidden" class="px-2 py-0.5 rounded bg-rose-950/50 border border-rose-800 text-[10px] font-mono text-rose-400">Forbidden</button>
+              <button id="btn-unindexed" class="px-2 py-0.5 rounded bg-purple-950/50 border border-purple-800 text-[10px] font-mono text-purple-400">Unindexed</button>
+            </div>
+          </div>
+
+          <div class="relative p-3 rounded-xl bg-[#030508] border border-slate-800/80 font-mono text-xs leading-relaxed text-cyan-200/90 shadow-inner">
+            <pre id="payload-pre" class="text-[11px]">
+{
+  "recommendations": [
+    {
+      "rawName": "Dave & Busters",
+      "domain": "place",
+      "agentClaimedReasoning": "Sports venue with drinks",
+      "agentClaimedAffinity": 0.88
+    }
+  ]
+}</pre>
+          </div>
+
+          <button id="btn-execute" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold font-mono text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-all cursor-pointer">
+            ▶ Execute Evaluation Pass
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Right Results Canvas (8 Cols) -->
+      <div class="col-span-12 lg:col-span-8 space-y-6">
+        
+        <!-- Scorecard Metric Strip -->
+        <div class="grid grid-cols-4 gap-4">
+          
+          <div class="cyber-panel rounded-2xl p-4 border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.08)]">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+              <span>PASS CHECKS</span>
+              <span class="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-800 text-[10px]">VERIFIED</span>
+            </div>
+            <div id="stat-pass" class="text-3xl font-mono font-bold text-emerald-400">0</div>
+          </div>
+
+          <div class="cyber-panel rounded-2xl p-4 border-amber-500/20 shadow-[0_0_20px_rgba(245,158,11,0.08)]">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+              <span>WARNINGS</span>
+              <span class="px-1.5 py-0.5 rounded bg-amber-950/60 text-amber-400 border border-amber-800 text-[10px]">WARNING</span>
+            </div>
+            <div id="stat-warn" class="text-3xl font-mono font-bold text-amber-400">0</div>
+          </div>
+
+          <div class="cyber-panel rounded-2xl p-4 border-rose-500/20 shadow-[0_0_20px_rgba(239,68,68,0.08)]">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+              <span>FAIL CHECKS</span>
+              <span class="px-1.5 py-0.5 rounded bg-rose-950/60 text-rose-400 border border-rose-800 text-[10px]">FAILED</span>
+            </div>
+            <div id="stat-fail" class="text-3xl font-mono font-bold text-rose-400">0</div>
+          </div>
+
+          <div class="cyber-panel rounded-2xl p-4 border-purple-500/30 shadow-[0_0_20px_rgba(168,85,247,0.15)]">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
+              <span>UNVERIFIABLE</span>
+              <span class="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-400 border border-purple-800 text-[10px]">UNVERIFIED</span>
+            </div>
+            <div id="stat-unverifiable" class="text-3xl font-mono font-bold text-purple-400">1</div>
+          </div>
+
+        </div>
+
+        <!-- Findings Table Container -->
+        <div class="cyber-panel rounded-2xl p-5 space-y-4 min-h-[360px]">
+          <div class="flex items-center justify-between border-b border-white/5 pb-3 font-mono text-xs">
+            <div class="flex items-center gap-3">
+              <span id="findings-title" class="text-white font-bold">ALL FINDINGS (1)</span>
+              <span class="text-slate-500">|</span>
+              <span id="findings-summary" class="text-purple-400">UNVERIFIABLE: 1</span>
+            </div>
+            <div class="text-slate-400">
+              SEARCH: <input id="findings-search" type="text" placeholder="Filter findings..." class="bg-slate-950 border border-slate-800 rounded px-2 py-0.5 text-xs text-slate-200 outline-none focus:border-cyan-500">
+            </div>
+          </div>
+
+          <!-- Finding Table Row -->
+          <div id="findings-list" class="space-y-3">
+            <div class="p-4 rounded-xl bg-slate-950/80 border border-purple-500/30 flex items-center justify-between hover:border-purple-500/60 transition-all shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+              <div class="space-y-1">
+                <div class="flex items-center gap-3">
+                  <span class="font-bold text-white text-sm">Dave & Busters</span>
+                  <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-400 border border-purple-800 font-mono text-[10px]">UNVERIFIABLE</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 font-mono text-[10px]">UNRESOLVED_ENTITY</span>
+                </div>
+                <p class="text-xs font-mono text-slate-400">
+                  Rule 1: Entity identity resolution returned 0 results in Qloo knowledge graph.
+                </p>
+              </div>
+
+              <button class="px-3 py-1.5 rounded-lg bg-purple-950/50 border border-purple-700/60 text-xs font-mono text-purple-300 hover:bg-purple-900/60 transition-all cursor-pointer">
+                Inspect Evidence →
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    const payloads = {
+      valid: `{
+  "recommendations": [
+    {
+      "rawName": "The Four Horsemen",
+      "domain": "place",
+      "agentClaimedReasoning": "Intimate dining with natural wine curation.",
+      "agentClaimedAffinity": 0.88
+    },
+    {
+      "rawName": "Ten Bells",
+      "domain": "place",
+      "agentClaimedReasoning": "Cozy natural wine bar in Lower Manhattan.",
+      "agentClaimedAffinity": 0.74
+    }
+  ]
+}`,
+      forbidden: `{
+  "recommendations": [
+    {
+      "rawName": "Dave & Busters",
+      "domain": "place",
+      "agentClaimedReasoning": "Sports venue with drinks and arcade games.",
+      "agentClaimedAffinity": 0.32
+    }
+  ]
+}`,
+      unindexed: `{
+  "recommendations": [
+    {
+      "rawName": "Hypothetical Cyberpunk Loft",
+      "domain": "place",
+      "agentClaimedReasoning": "Fictional underground venue."
+    }
+  ]
+}`
+    };
+
+    let activePreset = 'unindexed';
+
+    function setPreset(preset) {
+      activePreset = preset;
+      document.getElementById('payload-pre').textContent = payloads[preset];
+      document.querySelectorAll('#btn-valid, #btn-forbidden, #btn-unindexed').forEach(btn => {
+        btn.classList.remove('ring-1', 'ring-cyan-400');
+      });
+      document.getElementById('btn-' + preset).classList.add('ring-1', 'ring-cyan-400');
+    }
+
+    document.getElementById('btn-valid').onclick = () => setPreset('valid');
+    document.getElementById('btn-forbidden').onclick = () => setPreset('forbidden');
+    document.getElementById('btn-unindexed').onclick = () => setPreset('unindexed');
+
+    document.getElementById('btn-execute').onclick = () => {
+      if (activePreset === 'valid') {
+        document.getElementById('stat-pass').textContent = '2';
+        document.getElementById('stat-warn').textContent = '0';
+        document.getElementById('stat-fail').textContent = '0';
+        document.getElementById('stat-unverifiable').textContent = '0';
+        document.getElementById('findings-title').textContent = 'ALL FINDINGS (2)';
+        document.getElementById('findings-summary').textContent = 'PASS: 2 (100%)';
+        document.getElementById('findings-summary').className = 'text-emerald-400';
+        document.getElementById('findings-list').innerHTML = `
+          <div class="p-4 rounded-xl bg-slate-950/80 border border-emerald-500/30 flex items-center justify-between hover:border-emerald-500/60 transition-all shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+            <div class="space-y-1">
+              <div class="flex items-center gap-3">
+                <span class="font-bold text-white text-sm">The Four Horsemen</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono text-[10px]">PASS</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 font-mono text-[10px]">NUMERIC_GROUNDING</span>
+              </div>
+              <p class="text-xs font-mono text-slate-400">Rule 3: Verified Score 0.88 ≥ Threshold 0.65</p>
+            </div>
+            <button class="px-3 py-1.5 rounded-lg bg-emerald-950/50 border border-emerald-700/60 text-xs font-mono text-emerald-300 hover:bg-emerald-900/60 transition-all">Inspect Evidence →</button>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-950/80 border border-emerald-500/30 flex items-center justify-between hover:border-emerald-500/60 transition-all shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+            <div class="space-y-1">
+              <div class="flex items-center gap-3">
+                <span class="font-bold text-white text-sm">Ten Bells</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono text-[10px]">PASS</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 font-mono text-[10px]">NUMERIC_GROUNDING</span>
+              </div>
+              <p class="text-xs font-mono text-slate-400">Rule 3: Verified Score 0.74 ≥ Threshold 0.65</p>
+            </div>
+            <button class="px-3 py-1.5 rounded-lg bg-emerald-950/50 border border-emerald-700/60 text-xs font-mono text-emerald-300 hover:bg-emerald-900/60 transition-all">Inspect Evidence →</button>
+          </div>
+        `;
+      } else if (activePreset === 'forbidden') {
+        document.getElementById('stat-pass').textContent = '0';
+        document.getElementById('stat-warn').textContent = '0';
+        document.getElementById('stat-fail').textContent = '1';
+        document.getElementById('stat-unverifiable').textContent = '0';
+        document.getElementById('findings-title').textContent = 'ALL FINDINGS (1)';
+        document.getElementById('findings-summary').textContent = 'FAIL: 1';
+        document.getElementById('findings-summary').className = 'text-rose-400';
+        document.getElementById('findings-list').innerHTML = `
+          <div class="p-4 rounded-xl bg-slate-950/80 border border-rose-500/30 flex items-center justify-between hover:border-rose-500/60 transition-all shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+            <div class="space-y-1">
+              <div class="flex items-center gap-3">
+                <span class="font-bold text-white text-sm">Dave & Busters</span>
+                <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-400 border border-rose-800 font-mono text-[10px]">FAIL</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 font-mono text-[10px]">FORBIDDEN_TAG</span>
+              </div>
+              <p class="text-xs font-mono text-slate-400">Rule 5: Forbidden attribute tag matched ['sports_bar']</p>
+            </div>
+            <button class="px-3 py-1.5 rounded-lg bg-rose-950/50 border border-rose-700/60 text-xs font-mono text-rose-300 hover:bg-rose-900/60 transition-all">Inspect Evidence →</button>
+          </div>
+        `;
+      } else {
+        document.getElementById('stat-pass').textContent = '0';
+        document.getElementById('stat-warn').textContent = '0';
+        document.getElementById('stat-fail').textContent = '0';
+        document.getElementById('stat-unverifiable').textContent = '1';
+        document.getElementById('findings-title').textContent = 'ALL FINDINGS (1)';
+        document.getElementById('findings-summary').textContent = 'UNVERIFIABLE: 1';
+        document.getElementById('findings-summary').className = 'text-purple-400';
+        document.getElementById('findings-list').innerHTML = `
+          <div class="p-4 rounded-xl bg-slate-950/80 border border-purple-500/30 flex items-center justify-between hover:border-purple-500/60 transition-all shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+            <div class="space-y-1">
+              <div class="flex items-center gap-3">
+                <span class="font-bold text-white text-sm">Hypothetical Cyberpunk Loft</span>
+                <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-400 border border-purple-800 font-mono text-[10px]">UNVERIFIABLE</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 font-mono text-[10px]">UNRESOLVED_ENTITY</span>
+              </div>
+              <p class="text-xs font-mono text-slate-400">Rule 1: Entity identity resolution returned 0 results in Qloo knowledge graph.</p>
+            </div>
+            <button class="px-3 py-1.5 rounded-lg bg-purple-950/50 border border-purple-700/60 text-xs font-mono text-purple-300 hover:bg-purple-900/60 transition-all">Inspect Evidence →</button>
+          </div>
+        `;
+      }
+    };
+  </script>
+</body>
+</html>
