@@ -68,7 +68,7 @@ export const App: React.FC = () => {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const [activeTab, setActiveTab] = useState<NavTabId>('testbench');
+  const [activeTab, setActiveTab] = useState<NavTabId>('landing');
   const [health, setHealth] = useState<SystemHealthStatus | null>(null);
   const [templates, setTemplates] = useState<EvaluationScenario[]>([DEMO_BROOKLYN_SCENARIO, DEMO_KYOTO_SCENARIO]);
   const [selectedScenario, setSelectedScenario] = useState<EvaluationScenario | null>(DEMO_BROOKLYN_SCENARIO);
