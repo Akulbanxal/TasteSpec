@@ -1,25 +1,42 @@
 # TASTESPEC: Empirical Taste Grounding & Diagnostic Platform for Cultural AI Agents
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-taste--spec.vercel.app-00E5FF?style=for-the-badge&logo=vercel&logoColor=black)](https://taste-spec.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Akulbanxal%2FTasteSpec-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Akulbanxal/TasteSpec)
 [![Qloo API v2 Powered](https://img.shields.io/badge/Qloo%20API-v2%20Powered-06B6D4?style=for-the-badge&logo=graphql&logoColor=white)](https://qloo.com)
 [![MIT License](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](LICENSE)
 [![TypeScript Strict](https://img.shields.io/badge/TypeScript-5.x%20Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![SSRF Protected](https://img.shields.io/badge/Security-SSRF%20Protected-8B5CF6?style=for-the-badge&logo=securityscorecard&logoColor=white)](#ssrf-protected-agent-adapters)
 
+> 🚀 **Live Production Deployment:** **[https://taste-spec.vercel.app](https://taste-spec.vercel.app)**  
+> 📂 **GitHub Repository:** **[https://github.com/Akulbanxal/TasteSpec](https://github.com/Akulbanxal/TasteSpec)**  
+> 
 > **TASTESPEC** is an enterprise-grade evaluation benchmark and diagnostic testbench for Cultural AI Agents. It cross-examines agent recommendations against Qloo's 250M+ entity cultural intelligence graph using 7 deterministic mathematical audit rules, sealing every verdict into a verifiable evidence ledger.
 
 ---
 
 ## Table of Contents
 
-1. [Problem vs Solution](#problem-vs-solution)
-2. [Key Capabilities](#key-capabilities)
-3. [The 7 Deterministic Audit Rules](#the-7-deterministic-audit-rules)
-4. [System Architecture](#system-architecture)
-5. [Installation & Quickstart](#installation--quickstart)
-6. [Interactive 15-Second Guided Demo](#interactive-15-second-guided-demo)
-7. [SSRF-Protected Agent Adapters](#ssrf-protected-agent-adapters)
-8. [CLI & Development Commands](#cli--development-commands)
-9. [MIT License](#mit-license)
+1. [Live Deployment](#live-deployment)
+2. [Problem vs Solution](#problem-vs-solution)
+3. [Key Capabilities](#key-capabilities)
+4. [The 7 Deterministic Audit Rules](#the-7-deterministic-audit-rules)
+5. [System Architecture](#system-architecture)
+6. [Installation & Quickstart](#installation--quickstart)
+7. [Interactive 15-Second Guided Demo](#interactive-15-second-guided-demo)
+8. [SSRF-Protected Agent Adapters](#ssrf-protected-agent-adapters)
+9. [CLI & Development Commands](#cli--development-commands)
+10. [MIT License](#mit-license)
+
+---
+
+## Live Deployment
+
+TASTESPEC is deployed to production on Vercel with automated CI/CD from GitHub:
+
+* **Production URL:** [https://taste-spec.vercel.app](https://taste-spec.vercel.app)
+* **Default View:** Interactive 3D Revolving Cultural Core (`LandingHeroView`)
+* **API Endpoints:** Vercel Serverless Functions powered by Express (`/api/health`, `/api/scenarios`, `/api/eval/run`)
+* **Client Architecture:** React 18, Three.js, Framer Motion, Tailwind CSS (Vite bundled with manual Three.js vendor code-splitting)
 
 ---
 
@@ -150,13 +167,15 @@ flowchart TD
 
 ```
 TasteSpec/
+├── api/                        # Vercel Serverless Function Adapter
+│   └── index.ts                # Direct entrypoint for /api routes
 ├── client/                     # Frontend Application (React 18 + Vite + Tailwind CSS)
 │   ├── src/
 │   │   ├── components/         # Views: LandingHeroView, TestbenchView, Mission3DView, etc.
 │   │   ├── components/common/  # Reusable: AppHeader, AuditTable, EvidenceDrawer, etc.
 │   │   ├── data/               # High-fidelity offline demo fixtures & fallback scenarios
 │   │   └── index.css           # Custom glassmorphism, cyber neon tokens, day/night themes
-│   └── vite.config.ts          # Vite build config with /api dev proxy
+│   └── vite.config.ts          # Vite build config with manual vendor code-splitting
 ├── server/                     # Backend API Service (Node.js + Express + TypeScript)
 │   ├── src/
 │   │   ├── services/
@@ -170,6 +189,7 @@ TasteSpec/
 │   ├── src/
 │   │   ├── evaluationModel.ts  # Zod schemas for Scenarios, Reports, and Findings
 │   │   └── evidenceLedger.ts   # Evidence ledger record schemas and integrity checkers
+├── vercel.json                 # Vercel build, output directory, and SPA rewrites
 └── test/                       # Comprehensive Test Suite (tsx --test)
     ├── evalEngine.test.ts      # Deterministic rule unit tests (Rules 1-7)
     ├── qlooClient.test.ts      # Qloo client caching, timeouts, and error handling
@@ -188,8 +208,8 @@ TasteSpec/
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/your-org/tastespec.git
-cd tastespec
+git clone https://github.com/Akulbanxal/TasteSpec.git
+cd TasteSpec
 ```
 
 ### 2. Install Dependencies
@@ -206,8 +226,9 @@ Edit `.env` to include your Qloo API key:
 ```env
 PORT=3001
 NODE_ENV=development
-QLOO_API_BASE_URL=https://staging-api.qloo.com
+QLOO_API_BASE_URL=https://hackathon.api.qloo.com
 QLOO_API_KEY=your_qloo_api_key_here
+USE_QLOO_FIXTURES=false
 ```
 
 > **Note:** If `QLOO_API_KEY` is not provided, TASTESPEC automatically runs in **Offline Fixture Mode**, enabling full evaluation testing with realistic Brooklyn and Tokyo culture vectors.
@@ -223,7 +244,7 @@ Open **[http://localhost:5173](http://localhost:5173)** in your browser.
 
 ## Interactive 15-Second Guided Demo
 
-TASTESPEC includes an automated 15-second guided demo engine built for judges, auditors, and technical evaluators:
+You can experience the interactive guided demo live directly on **[https://taste-spec.vercel.app](https://taste-spec.vercel.app)** or locally:
 
 1. Click **"▶ Run 15-Second Guided Demo"** in the top testbench bar.
 2. An interactive telemetry overlay tracks real-time execution:
