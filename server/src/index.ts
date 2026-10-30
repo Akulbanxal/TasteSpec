@@ -91,9 +91,13 @@ if (fs.existsSync(config.clientDistPath)) {
   });
 }
 
-const server = app.listen(config.port, () => {
-  console.log(`[TASTESPEC] Server listening on port ${config.port} (${config.nodeEnv})`);
-  console.log(`[TASTESPEC] Qloo API configured: ${Boolean(config.qlooApiKey)} | Fixtures: ${config.useQlooFixtures}`);
-});
+let server: any = null;
+if (!process.env.VERCEL) {
+  server = app.listen(config.port, () => {
+    console.log(`[TASTESPEC] Server listening on port ${config.port} (${config.nodeEnv})`);
+    console.log(`[TASTESPEC] Qloo API configured: ${Boolean(config.qlooApiKey)} | Fixtures: ${config.useQlooFixtures}`);
+  });
+}
 
 export { app, server };
+export default app;
